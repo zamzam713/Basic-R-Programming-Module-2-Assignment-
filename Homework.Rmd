@@ -1,0 +1,352 @@
+---
+title: "zamzamnew"
+author: "Zamzam"
+date: '2023-10-19'
+output: html_document
+---
+In section 6 
+1. Write a code to create a list, populate it with data (integers from 1 to 9, the first ten letters
+from the English alphabet, and the words cat, dog, rabbit in factor mode). Check the modes
+in this list and the class of each of its sub elements.
+
+
+```{r }
+myList <- list(1:9, letters[1:10], as.factor(c("cat", "dog", "rabbit")))
+myList
+get_mode <- function(x) {
+  if (is.factor(x)) {
+    return("N/A for factors")
+  } else {
+    uniq_x <- unique(x)
+    counts <- table(x)
+    max_count <- max(counts)
+    modes <- uniq_x[counts == max_count]
+    return(modes)
+  }
+}
+
+mode_list <- sapply(myList, get_mode)
+class_list <- sapply(myList, function(x) if (is.factor(x)) "factor" else class(x))
+
+print(mode_list)
+print(class_list)
+```
+Write a code that creates two arbitrary vectors (vec1 = (1, 2, 3), vec2 = (4, 5, 6)), and combines them into one unified vector named all.
+```{r }
+vec1<-c(1,2,3)
+vec2<-c(4,5,6)
+combined<-c(vec1,vec2)
+print(combined)
+```
+You can assign names to every element inside a vector as displayed below. Write a code
+that displays two ways of doing so.
+```{r }
+vect0<-c(1,2,3,4,5,6)
+names(vect0)<-c("one","two","three","four","five","six")
+print(vect0)
+vect0<-c(1,2,3,4,5,6)
+vect1<-c(one=1,two=2,three=3,four=4,five=5,six=6)
+print(vect1)
+```
+4. Write a code to add a scalar to every element of a vector of integers from 1 to 10.
+```{r }
+orgvec<-1:10
+scalartoadd<-8
+newvec<-orgvec+scalartoadd
+print(newvec)
+
+```
+5. Write a code to create a matrix of 5 × 3 of random numbers and name the columns A,B,
+and C.
+```{r }
+randommatrix<-matrix(runif(15), nrow = 5, ncol = 3)
+colnames(randommatrix) <- c("A", "B", "C")
+print(randommatrix)
+
+```
+6.Write a code to create a list consisting of the integers 1, 3, and 5, and name its elements
+using the terms “one”, “three”, and “five”. Provide two ways of performing this. 
+```{r }
+int<-c(1,3,5)
+naming<-setNames(int,c("one","three","five"))
+print(naming)
+
+ 
+list1<-list(one=1,two=2,five=5)
+print(list1)
+```
+In section 7 
+1. Write a code to change the numbers that are greater than 10 to zero. 
+```{r }
+nums <- c(12,9,8,14,7,16,3,2,9)
+nums > 10
+nums<-ifelse(nums>10,0,nums)
+print(nums)
+```
+1. Write a code to create a matrix x of 4 rows and 3 columns filled with a sequence of numbers
+from 1 to 12.
+```{r }
+x <- matrix(1:12, nrow = 4, ncol = 3)
+print(x)
+```
+2. Write a code to refer to the element of matrix x located in the fourth row and third column.
+
+```{r }
+element <- x[4, 3]
+print(element)
+```
+3. Write a code to select the first column of matrix x. 
+```{r }
+first_column <- x[, 1]
+print(first_column)
+```
+4. Write a code to select the third and the first column of matrix x. 
+```{r }
+selected_columns <- x[, c(1, 3)]
+print(selected_columns)
+
+
+```
+5. Write a code to select the second row of matrix x.
+
+```{r }
+
+
+second_row <- x[2, ]
+print(second_row)
+```
+In section 8
+1. Create a factor called fdata of the following form: 
+## [1] 1 2 2 3 1 2 3 3 1 2 3 3 1
+## Levels: 1 2 3
+```{r }
+
+
+fdata <- factor(c(1, 2, 2, 3, 1, 2, 3, 3, 1, 2, 3, 3, 1), levels = c(1, 2, 3))
+print(fdata)
+
+```
+
+2. Convert the default levels of the factor fdata to roman numerals, such that it becomes as
+follows: 
+## [1] I II II III I II III III I II III III I
+## Levels: I II III
+```{r }
+
+levels(fdata) <- c("I", "II", "III")
+print(fdata)
+```
+In section 10 
+1. Write a code to generate a sequence of integers between 1 to 10. 
+```{r }
+sequence <- seq(1, 10)
+print(sequence)
+
+```
+2. Write a code to to create a vector of values from 10 to 100, in increasing order, and where
+each two successive elements differ by 5. 
+```{r }
+
+vector <- seq(10, 100, by = 5)
+print(vector)
+
+
+```
+3. Write a code to create a vector of length 10 of values from 10 to 100, in increasing order,
+and where each two successive elements differ by 5.
+```{r }
+
+
+vector2 <- seq(10, by = 5, length.out = 10)
+print(vector2)
+
+```
+In section 12 
+1. What is the code used to transform a Date object (e.g. January 15, 2001) to its internal form?
+```{r }
+
+ date_str <- "January 15, 2001"
+date_internal <- as.Date(date_str, format = "%B %d, %Y")
+print(date_internal)
+
+```
+2. When the dates are properly read into R, what is the code used to calculate the mean, range
+and the time difference between the above shown dates? 
+
+```{r }
+
+ 
+release <- c(1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0)
+date <- as.Date(c("2000-02-29",
+                  "2000-06-15",
+                  "2000-12-15",
+                  "2001-06-22",
+                  "2001-12-19",
+                  "2002-04-29",
+                  "2002-10-01",
+                  "2003-04-16",
+                  "2003-10-08",
+                  "2004-04-12",
+                  "2004-10-04"))
+
+
+rdates <- data.frame(Release = release, Date = date)
+
+
+print(mean(rdates$Date))
+
+min_date <- min(rdates$Date)
+max_date <- max(rdates$Date)
+range <- max_date - min_date
+print(range)
+
+attach(rdates)
+rdates$Date_Difference <- c(NA, diff(Date))
+detach(rdates)
+
+print(rdates)
+
+```
+In section 13 
+1. What is the code used to break the sentence ’R is a free software environment for statistical
+computing’ into a sequence of words based on a space? 
+
+
+```{r }
+
+sentence <- "R is a free software environment for statistical computing"
+words <- strsplit(sentence, " ")[[1]]
+print(words)
+
+```
+1. What is the code used to substitute the dollar sign and comma with spaces in the given
+vector.
+```{r }
+values <- c('$11,317.35', '$11,234.51', '$11,275.89', '$11,278.93', '$11,294.94')
+values_cleaned <- gsub("[$,]", " ", values)
+print(values_cleaned)
+
+```
+(a) Write a code that converts the output from table tt to a data frame.
+```{r }
+pets = c('dog','cat','duck','chicken','duck', 'cat','dog')
+tt = table(pets)
+tt
+```
+(c) Consider the infert dataset that comes with R, and which contains information about
+the education and parity of experimental subjects. Generate a cross-tabulation showing education level per parity.
+```{r }
+df <- as.data.frame(tt)
+print(df)
+data(infert)
+tt <- xtabs(~ education + parity, data = infert)
+print(tt)
+```
+(e) Use a margin= argument of c(1,2) to add margins to both the rows and columns of tt
+and save the result in a new table tt12. 
+```{r }
+tt12 = addmargins(tt,c(1,2))
+tt12
+```
+In section 14 
+(a) Consider the Loblolly built-in dataset in R. Provide three ways to create new variable
+logheight, consisting of the logarithm of the values in the height column already
+existing in the dataset.
+```{r }
+library(datasets)
+data("Loblolly")
+Loblolly <- transform(Loblolly, logheight = log(height))
+head(Loblolly)
+
+data("Loblolly")
+Loblolly$logheight <- log(Loblolly$height)
+head(Loblolly)
+ 
+library(dplyr)
+data("Loblolly")
+Loblolly <- Loblolly %>% mutate(logheight = log(height))
+head(Loblolly)
+```
+(b) Using the iris dataset again, write a code to to create a categorical variable called
+sepalgroup, based on Sepal.Length, which will be equal to 1 for lengths less than or
+equal to 5, equal to 2 for lengths between 5 and 7, and equal to 3 for lengths greater
+than or equal to 7.
+```{r }
+data(iris)
+iris$sepalgroup <- ifelse(iris$Sepal.Length <= 5, 1, ifelse(iris$Sepal.Length < 7, 2, 3))
+original_group <- c(1, 2, 3, 4, 5)
+group <- sample(original_group, 10, replace = TRUE)  
+
+```
+(d) Continuing with the previous example, suppose we wish to recode possible values
+that group can take. For example, if group is 1 or 5, we recode it to 1, if it is 2 or 4, we
+recode it to 2, and if it has any other value than 1, 5, 2, or 4, we recode it to 3. What is
+the code used to achieve this using only one ifelse statement? 
+```{r }
+newgroup <- ifelse(group %in% c(1, 5), 1, 2)
+group <- c(1, 2, 3, 4, 5) 
+newgroup <- ifelse(group %in% c(1, 5), 1, ifelse(group %in% c(2, 4), 2, 3))
+```
+(a) Redo part (4) of Sec. 14.2 using the recode() function.
+```{r }
+library(dplyr)
+group <- c(1, 2, 3, 4, 5)  
+newgroup <- recode(group, `1` = 1, `5` = 1, `2` = 2, `4` = 2, .default = 3)
+```
+In section 15 
+(b) Write a function that prints “Hello, world!" a number of times equal to num, where num
+is an arbitrary integer. Then demonstrate your code by running it on num = 3. 
+```{r }
+print_hello_world <- function(num) {
+  for (i in 1:num) {
+    cat("Hello, world!\n")
+  }
+}
+num <- 3
+print_hello_world(num)
+```
+(a) Specify the command used to check the arguments of a specific function, and demonstrate your code on the lm() function in R. 
+```{r }
+args(lm)
+args(print_hello_world )
+```
+In section 16
+(a) What is the code used to get the mean of a list of integers from 1 to 5 using lapply()
+and mean() functions? 
+```{r }
+my_list <- list(1, 2, 3, 4, 5)
+result <- lapply(my_list, mean)
+print(result)
+```
+(a) Write a code to create a 20 by 10 matrix of normally distributed random numbers, and
+then compute the mean of each column and the sum of values in each row.
+
+```{r }
+nrows <- 20
+ncols <- 10
+random_matrix <- matrix(rnorm(nrows * ncols), nrow = nrows, ncol = ncols)
+column_means <- colMeans(random_matrix)
+row_sums <- rowSums(random_matrix)
+print("Matrix of Random Numbers:")
+print(random_matrix)
+cat("\n")
+
+print("Mean of Each Column:")
+print(column_means)
+cat("\n")
+
+print("Sum of Values in Each Row:")
+print(row_sums)
+```
+
+
+
+
+
+
+
+
+
+
+
+
